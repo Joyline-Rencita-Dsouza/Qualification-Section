@@ -116,3 +116,32 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add event listener for window resize
   window.addEventListener("resize", handleResize);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const handleResize = () => {
+    const cards = document.querySelectorAll(".card");
+    const icons = document.querySelectorAll(".icon-left, .icon-right");
+
+    if (window.innerWidth <= 1024) {
+      // Remove icons and adjust card width
+      cards.forEach(card => {
+        card.style.width = "90%";
+        card.style.margin = "20px auto";
+      });
+      icons.forEach(icon => (icon.style.display = "none"));
+    } else {
+      // Reset styles for larger screens
+      cards.forEach(card => {
+        card.style.width = "";
+        card.style.margin = "";
+      });
+      icons.forEach(icon => (icon.style.display = ""));
+    }
+  };
+
+  // Run on initial load
+  handleResize();
+
+  // Add event listener for window resize
+  window.addEventListener("resize", handleResize);
+});
