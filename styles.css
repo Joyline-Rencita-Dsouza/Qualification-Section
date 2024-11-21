@@ -191,6 +191,20 @@ h1 {
   }
 }
 
+/* Remove icons for small mobile screens (below 768px) */
+@media (max-width: 768px) {
+  .timeline .icon-left, 
+  .timeline .icon-right {
+    display: none; /* Completely hide the icons */
+  }
+
+  .timeline .card {
+    width: 90%; /* Increase the width for small screens */
+    margin: 20px auto; /* Center the card */
+  }
+}
+
+
 /* Medium devices (tablets, 600px to 900px) */
 @media (min-width: 600px) and (max-width: 900px) {
   .container {
