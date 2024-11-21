@@ -145,3 +145,68 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add event listener for window resize
   window.addEventListener("resize", handleResize);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const experienceBtn = document.getElementById("experience-btn");
+  const educationBtn = document.getElementById("education-btn");
+  const experienceContent = document.getElementById("experience");
+  const educationContent = document.getElementById("education");
+
+  const handleResize = () => {
+    const cards = document.querySelectorAll(".card");
+    const icons = document.querySelectorAll(".icon-left, .icon-right");
+
+    if (window.innerWidth <= 1024) {
+      // Adjust styles for smaller screens
+      cards.forEach(card => {
+        card.style.width = "90%";
+        card.style.margin = "20px auto";
+      });
+      icons.forEach(icon => (icon.style.display = "none"));
+    } else {
+      // Reset styles for larger screens
+      cards.forEach(card => {
+        card.style.width = "";
+        card.style.margin = "";
+      });
+      icons.forEach(icon => (icon.style.display = ""));
+    }
+  };
+
+  // Smooth toggle between tabs
+  const smoothToggle = (showContent, hideContent) => {
+    hideContent.style.opacity = 0;
+    hideContent.style.pointerEvents = "none"; // Disable interactions
+    setTimeout(() => {
+      hideContent.style.display = "none"; // Hide after fade-out
+      showContent.style.display = "block"; // Show new content
+      setTimeout(() => {
+        showContent.style.opacity = 1; // Fade in
+        showContent.style.pointerEvents = "auto"; // Enable interactions
+      }, 50); // Slight delay for smooth fade-in
+    }, 300); // Delay matching the fade-out duration
+  };
+
+  // Event listeners for buttons
+  experienceBtn.addEventListener("click", () => {
+    if (!experienceContent.classList.contains("active")) {
+      experienceBtn.classList.add("active");
+      educationBtn.classList.remove("active");
+      smoothToggle(experienceContent, educationContent);
+    }
+  });
+
+  educationBtn.addEventListener("click", () => {
+    if (!educationContent.classList.contains("active")) {
+      educationBtn.classList.add("active");
+      experienceBtn.classList.remove("active");
+      smoothToggle(educationContent, experienceContent);
+    }
+  });
+
+  // Run on initial load
+  handleResize();
+
+  // Add event listener for window resize
+  window.addEventListener("resize", handleResize);
+});
